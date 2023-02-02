@@ -1,4 +1,6 @@
-const makeShip = (length) => {
+// Factory function for Ships objects
+
+const Ship = (length) => {
   let timesHit = 0;
 
   const hit = () => {
@@ -16,6 +18,7 @@ const makeShip = (length) => {
   return {
     length,
     get timesHit() {
+      // Allows for Individual Ship objects timesHit to be updated when hit
       return timesHit;
     },
     isSunk,
@@ -23,4 +26,4 @@ const makeShip = (length) => {
   };
 };
 
-export default makeShip;
+export default Ship;
