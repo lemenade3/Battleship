@@ -17,12 +17,11 @@ test("Ship hits returns same as timesHit", () => {
   expect(ship.hit()).toBe(ship.timesHit);
 });
 
-/* test("isSunk is called when timesHit === length", () => {
+test("isSunk returns true when timesHit === length", () => {
   const num = 4;
   const ship = makeShip(num);
   for (let i = 0; i < num; i += 1) {
     ship.hit();
   }
   expect(ship.isSunk()).toBe(true);
-  expect(ship.sunk).toBe(true);
-}); */
+});

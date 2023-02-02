@@ -1,5 +1,4 @@
 const makeShip = (length) => {
-  let sunk = false;
   let timesHit = 0;
 
   const hit = () => {
@@ -7,15 +6,19 @@ const makeShip = (length) => {
     return timesHit;
   };
 
-  if (length === timesHit) {
-    sunk = true;
-  }
+  const isSunk = () => {
+    if (length === timesHit) {
+      return true;
+    }
+    return false;
+  };
+
   return {
     length,
     get timesHit() {
       return timesHit;
     },
-    sunk,
+    isSunk,
     hit,
   };
 };
