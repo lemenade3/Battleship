@@ -38,3 +38,39 @@ test("placeShip places points at correct coordinates ", () => {
   expect(isOccupied(3, 4)).toBe(true);
   expect(isOccupied(10, 10)).toBe(true);
 });
+
+test("placeShip works for ships longer than 1", () => {
+  const gameboard = Gameboard();
+  gameboard.placeShip(3, 4, 4);
+  const isOccupied = (x, y) => {
+    if (gameboard.board[x][y].occupied) {
+      return true;
+    }
+    return false;
+  };
+  expect(isOccupied(3, 4)).toBe(true);
+  expect(isOccupied(4, 4)).toBe(true);
+  expect(isOccupied(5, 4)).toBe(true);
+  expect(isOccupied(6, 4)).toBe(true);
+});
+
+test("placeShip works in the Y axis", () => {
+  const gameboard = Gameboard();
+  gameboard.placeShip(3, 4, 4, 1);
+  const isOccupied = (x, y) => {
+    if (gameboard.board[x][y].occupied) {
+      return true;
+    }
+    return false;
+  };
+  expect(isOccupied(3, 4)).toBe(true);
+  expect(isOccupied(3, 3)).toBe(true);
+  expect(isOccupied(3, 2)).toBe(true);
+  expect(isOccupied(3, 1)).toBe(true);
+});
+
+test("placeShip rejects if cell already occupied", () => {
+  const gameboard = Gameboard();
+  gameboard.placeShip(3, 4, 4, 1);
+  expect(gameboard.placeShip(1, 3, 3)).toBe(false);
+});
