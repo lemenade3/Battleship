@@ -74,3 +74,22 @@ test("placeShip rejects if cell already occupied", () => {
   gameboard.placeShip(3, 4, 4, 1);
   expect(gameboard.placeShip(1, 3, 3)).toBe(false);
 });
+
+test("receiveAttack records hit and sends it to ship", () => {
+  const gameboard = Gameboard();
+  gameboard.placeShip(3, 4, 4, 1);
+  gameboard.receiveAttack(3, 4);
+  expect(gameboard.board[3][4].hit).toBe(true);
+  expect(gameboard.board[3][4].occupied.timesHit).toBe(1);
+});
+
+test("receiveAttack works if cell unoccupied", () => {
+  const gameboard = Gameboard();
+  expect(gameboard.receiveAttack(3, 4)).toBe(gameboard.board[3][4].hit);
+});
+
+test("receiveAttack will return false if cell is already hit", () => {
+  const gameboard = Gameboard();
+  gameboard.receiveAttack(3, 4);
+  expect(gameboard.receiveAttack(3, 4)).toBe(false);
+});
