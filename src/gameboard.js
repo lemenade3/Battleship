@@ -59,10 +59,27 @@ const Gameboard = () => {
     return board[x][y].hit;
   };
 
+  const allSunk = () => {
+    let result;
+    for (let i = 0; i < 10; i += 1) {
+      for (let j = 0; j < 10; j += 1) {
+        if (board[i][j].occupied === true) {
+          if (board[i][j].occupied.isSunk() === false) {
+            result = false;
+            return result;
+          }
+        }
+        result = true;
+      }
+    }
+    return result;
+  };
+
   return {
     board,
     placeShip,
     receiveAttack,
+    allSunk,
   };
 };
 

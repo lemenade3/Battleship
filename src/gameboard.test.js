@@ -93,3 +93,8 @@ test("receiveAttack will return false if cell is already hit", () => {
   gameboard.receiveAttack(3, 4);
   expect(gameboard.receiveAttack(3, 4)).toBe(false);
 });
+
+test("allSunk returns true if all ships are sunk", () => {
+  const gameboard = Gameboard();
+  expect(gameboard.allSunk()).toBe(true);
+});
