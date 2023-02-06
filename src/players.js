@@ -11,8 +11,19 @@ const Player = () => {
 };
 
 const Computer = () => {
-  const placeholder = "a";
-  return { placeholder };
+  const prototype = Player();
+
+  const randomMove = (enemyBoard) => {
+    const x = Math.floor(Math.random() * 11);
+    const y = Math.floor(Math.random() * 11);
+
+    if (prototype.makeAttack(x, y, enemyBoard)) {
+      return true;
+    }
+    return randomMove(enemyBoard);
+  };
+
+  return { randomMove };
 };
 
 export { Player, Computer };
