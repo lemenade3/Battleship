@@ -98,3 +98,13 @@ test("allSunk returns true if all ships are sunk", () => {
   const gameboard = Gameboard();
   expect(gameboard.allSunk()).toBe(true);
 });
+
+test("gameboard instance is not shared", () => {
+  const gameboard1 = Gameboard();
+  const gameboard2 = Gameboard();
+  gameboard1.placeShip(3, 4, 4, 1);
+  gameboard1.receiveAttack(3, 4);
+  expect(gameboard1.board[3][4].hit).toBe(true);
+  expect(gameboard1.board[3][4].occupied.timesHit).toBe(1);
+  expect(gameboard2.board[3][4].hit).toBe(false);
+});
