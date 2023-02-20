@@ -1,0 +1,30 @@
+body {
+  padding: 0;
+  margin: 0;
+}
+
+.cell {
+  background-color: red;
+
+  &:hover {
+    background-color: rgb(142, 19, 19);
+  }
+}
+
+.hit {
+  background-color: purple;
+}
+
+.occupied {
+  background-color: blue;
+}
+
+.row {
+  display: flex;
+
+  div {
+    height: 60px;
+    width: 60px;
+    border: solid;
+  }
+}
