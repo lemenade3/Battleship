@@ -1,5 +1,7 @@
-const Player = () => {
-  const makeAttack = (x, y, enemyBoard) => {
+const Player = (enemyBoard) => {
+  const activePlayer = null;
+
+  const makeAttack = (x, y) => {
     if (enemyBoard.board[x][y].hit) {
       return false;
     }
@@ -7,11 +9,13 @@ const Player = () => {
     return true;
   };
 
-  return { makeAttack };
+  return { activePlayer, makeAttack };
 };
 
-const Computer = () => {
-  const makeAttack = (x, y, enemyBoard) => {
+const Computer = (enemyBoard) => {
+  const activePlayer = null;
+
+  const makeAttack = (x, y) => {
     if (enemyBoard.board[x][y].hit) {
       return false;
     }
@@ -19,17 +23,16 @@ const Computer = () => {
     return true;
   };
 
-  const randomMove = (enemyBoard) => {
-    const x = Math.floor(Math.random() * 11);
-    const y = Math.floor(Math.random() * 11);
+  const randomMove = () => {
+    const x = Math.floor(Math.random() * 10);
+    const y = Math.floor(Math.random() * 10);
 
-    if (makeAttack(x, y, enemyBoard)) {
-      return true;
+    if (!makeAttack(x, y)) {
+      randomMove();
     }
-    return randomMove(enemyBoard);
   };
 
-  return { randomMove };
+  return { activePlayer, randomMove };
 };
 
 export { Player, Computer };

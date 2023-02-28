@@ -1,12 +1,11 @@
 // functions needed for domManipulation
 
-const body = document.querySelector("body");
-const board = document.createElement("div");
+function renderBoard(game) {
+  const board = document.querySelector("#board");
+  const grid = document.querySelector("#grid");
 
-body.append(board);
-
-function renderBoard(gameboard, player) {
   board.innerHTML = "";
+  grid.innerHTML = "";
 
   for (let i = 0; i < 10; i += 1) {
     const row = document.createElement("div");
@@ -16,19 +15,43 @@ function renderBoard(gameboard, player) {
       cell.setAttribute("class", "cell");
       cell.textContent = "";
       cell.addEventListener("click", () => {
-        player.makeAttack(i, j, gameboard);
-        renderBoard(gameboard, player);
-        // function to call player.makeAttack
+        if (game.player1.activePlayer && !game.gameboard2.board[i][j].hit) {
+          game.player1.makeAttack(i, j);
+          game.changeTurn();
+          renderBoard(game);
+          // function to call player.makeAttack
+        }
       });
-      if (gameboard.board[i][j].occupied) {
-        cell.textContent = "S";
-      }
-      if (gameboard.board[i][j].hit) {
+      if (game.gameboard2.board[i][j].hit) {
         cell.setAttribute("class", "hit");
+        if (game.gameboard2.board[i][j].occupied) {
+          cell.textContent = "S";
+          if (game.gameboard2.board[i][j].occupied.isSunk()) {
+            console.log("Sunk!");
+          }
+        }
       }
       row.append(cell);
     }
     board.append(row);
+  }
+
+  for (let i = 0; i < 10; i += 1) {
+    const row = document.createElement("div");
+    row.setAttribute("class", "row");
+    for (let j = 0; j < 10; j += 1) {
+      const cell = document.createElement("div");
+      cell.setAttribute("class", "cell");
+      cell.textContent = "";
+      if (game.gameboard1.board[i][j].occupied) {
+        cell.textContent = "S";
+      }
+      if (game.gameboard1.board[i][j].hit) {
+        cell.setAttribute("class", "hit");
+      }
+      row.append(cell);
+    }
+    grid.append(row);
   }
 }
 
