@@ -1,6 +1,8 @@
+import { alertSunkShip } from "./domManipulation";
+
 // Factory function for Ships objects
 
-const Ship = (length) => {
+const Ship = (length, name = "") => {
   let timesHit = 0;
 
   const hit = () => {
@@ -10,6 +12,7 @@ const Ship = (length) => {
 
   const isSunk = () => {
     if (length === timesHit) {
+      alertSunkShip(name);
       return true;
     }
     return false;
@@ -23,6 +26,7 @@ const Ship = (length) => {
     },
     isSunk,
     hit,
+    name,
   };
 };
 

@@ -27,8 +27,8 @@ const Gameboard = () => {
     return false;
   };
 
-  const placeShip = (x, y, length = 1, axis = 0) => {
-    const ship = Ship(length);
+  const placeShip = (x, y, length = 1, axis = 0, name = "") => {
+    const ship = Ship(length, name);
     if (axis === 0) {
       for (let i = 0; i < length; i += 1) {
         if (isOccupied(x + i, y)) {

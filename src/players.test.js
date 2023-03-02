@@ -7,26 +7,26 @@ test("Player is an object", () => {
 });
 
 test("makeAttack calls recieveAttack on enemy's gameboard", () => {
-  const player = Player();
   const enemyBoard = Gameboard();
+  const player = Player(enemyBoard);
   enemyBoard.placeShip(3, 4);
-  player.makeAttack(3, 4, enemyBoard);
+  player.makeAttack(3, 4);
   expect(enemyBoard.board[3][4].hit).toBe(true);
 });
 
 test("makeAttack returns false if cell already hit", () => {
-  const player = Player();
   const enemyBoard = Gameboard();
+  const player = Player(enemyBoard);
   enemyBoard.placeShip(3, 4);
-  player.makeAttack(3, 4, enemyBoard);
+  player.makeAttack(3, 4);
   expect(player.makeAttack(3, 4, enemyBoard)).toBe(false);
 });
 
 test("Computer can make random move on enemyBoad", () => {
-  const computer = Computer();
   const enemyBoard = Gameboard();
+  const computer = Computer(enemyBoard);
   enemyBoard.placeShip(3, 4);
-  computer.randomMove(enemyBoard);
+  computer.randomMove();
   const checkRandom = () => {
     let result;
     for (let i = 0; i < 10; i += 1) {

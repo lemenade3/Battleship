@@ -17,6 +17,9 @@ function renderBoard(game) {
       cell.addEventListener("click", () => {
         if (game.player1.activePlayer && !game.gameboard2.board[i][j].hit) {
           game.player1.makeAttack(i, j);
+          if (game.gameboard2.board[i][j].occupied) {
+            game.gameboard2.board[i][j].occupied.isSunk();
+          }
           game.changeTurn();
           renderBoard(game);
           // function to call player.makeAttack
@@ -26,9 +29,6 @@ function renderBoard(game) {
         cell.setAttribute("class", "hit");
         if (game.gameboard2.board[i][j].occupied) {
           cell.textContent = "S";
-          if (game.gameboard2.board[i][j].occupied.isSunk()) {
-            console.log("Sunk!");
-          }
         }
       }
       row.append(cell);
@@ -55,7 +55,21 @@ function renderBoard(game) {
   }
 }
 
-export default renderBoard;
+function alertSunkShip(ship) {
+  const body = document.querySelector("body");
+  const alert = document.createElement("div");
+  const message = document.createElement("div");
+  message.textContent = `${ship} was Sunk!`;
+  const button = document.createElement("button");
+  button.textContent = "Ok!";
+  button.addEventListener("click", () => {
+    alert.remove();
+  });
+  alert.append(message, button);
+  body.append(alert);
+}
+
+export { renderBoard, alertSunkShip };
 
 // renderBoard, imports gameboard object from game and loops through
 // each cell and renders info on occupancy and hit status
