@@ -1,5 +1,19 @@
 // functions needed for domManipulation
 
+function alertSunkShip(ship) {
+  const body = document.querySelector("body");
+  const alert = document.createElement("div");
+  const message = document.createElement("div");
+  message.textContent = `${ship} was Sunk!`;
+  const button = document.createElement("button");
+  button.textContent = "Ok!";
+  button.addEventListener("click", () => {
+    alert.remove();
+  });
+  alert.append(message, button);
+  body.append(alert);
+}
+
 function renderBoard(game) {
   const board = document.querySelector("#board");
   const grid = document.querySelector("#grid");
@@ -18,7 +32,9 @@ function renderBoard(game) {
         if (game.player1.activePlayer && !game.gameboard2.board[i][j].hit) {
           game.player1.makeAttack(i, j);
           if (game.gameboard2.board[i][j].occupied) {
-            game.gameboard2.board[i][j].occupied.isSunk();
+            if (game.gameboard2.board[i][j].occupied.isSunk()) {
+              alertSunkShip(game.gameboard2.board[i][j].occupied.name);
+            }
           }
           game.changeTurn();
           renderBoard(game);
@@ -55,21 +71,7 @@ function renderBoard(game) {
   }
 }
 
-function alertSunkShip(ship) {
-  const body = document.querySelector("body");
-  const alert = document.createElement("div");
-  const message = document.createElement("div");
-  message.textContent = `${ship} was Sunk!`;
-  const button = document.createElement("button");
-  button.textContent = "Ok!";
-  button.addEventListener("click", () => {
-    alert.remove();
-  });
-  alert.append(message, button);
-  body.append(alert);
-}
-
-export { renderBoard, alertSunkShip };
+export default renderBoard;
 
 // renderBoard, imports gameboard object from game and loops through
 // each cell and renders info on occupancy and hit status

@@ -53,10 +53,20 @@ const newGame = (comp) => {
   };
 };
 
+function endGame(game) {
+  if (game.gameboard1.allSunk()) {
+    return `Player 2 is the winner!`;
+  }
+  if (game.gameboard2.allSunk()) {
+    return `Player 1 is the winner!`;
+  }
+  return false;
+}
+
 // functions needed for game
 
 // new game
 // end game
 // change turn
 
-export default newGame;
+export { newGame, endGame };
