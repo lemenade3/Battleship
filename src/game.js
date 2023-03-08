@@ -1,5 +1,6 @@
 import { Player, Computer } from "./players";
 import Gameboard from "./gameboard";
+import { alertEndGame } from "./domManipulation";
 
 // game loop needs to set up new game and create 2 players and gameboards
 // players should place ships (or coords used to predetermine placement) (later)
@@ -19,9 +20,19 @@ const newGame = (comp) => {
   const gameboard1 = Gameboard();
   const gameboard2 = Gameboard();
 
-  const player1 = Player(gameboard2);
+  const player1 = Player(gameboard2, "Player 1");
   player1.activePlayer = true;
   let player2;
+
+  const endGame = () => {
+    if (gameboard1.allSunk()) {
+      return alertEndGame(player2);
+    }
+    if (gameboard2.allSunk()) {
+      return alertEndGame(player1);
+    }
+    return false;
+  };
 
   const changeTurn = () => {
     if (player1.activePlayer) {
@@ -29,6 +40,7 @@ const newGame = (comp) => {
       player2.activePlayer = true;
       player2.randomMove(); // if statement needed here to allow multiplayer in future
       changeTurn();
+      endGame();
     } else {
       player1.activePlayer = true;
       player2.activePlayer = false;
@@ -53,20 +65,10 @@ const newGame = (comp) => {
   };
 };
 
-function endGame(game) {
-  if (game.gameboard1.allSunk()) {
-    return `Player 2 is the winner!`;
-  }
-  if (game.gameboard2.allSunk()) {
-    return `Player 1 is the winner!`;
-  }
-  return false;
-}
-
 // functions needed for game
 
 // new game
 // end game
 // change turn
 
-export { newGame, endGame };
+export default newGame;

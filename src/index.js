@@ -1,6 +1,6 @@
 import "./style.scss";
-import renderBoard from "./domManipulation";
-import { newGame } from "./game";
+import { renderBoard } from "./domManipulation";
+import newGame from "./game";
 import pageLoad from "./pageLoad";
 
 const game = newGame(true);

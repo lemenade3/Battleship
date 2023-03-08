@@ -1,4 +1,4 @@
-const Player = (enemyBoard) => {
+const Player = (enemyBoard, name) => {
   const activePlayer = null;
 
   const makeAttack = (x, y) => {
@@ -9,10 +9,11 @@ const Player = (enemyBoard) => {
     return true;
   };
 
-  return { activePlayer, makeAttack };
+  return { activePlayer, makeAttack, name };
 };
 
 const Computer = (enemyBoard) => {
+  const name = "Computer";
   const activePlayer = null;
 
   const makeAttack = (x, y) => {
@@ -32,7 +33,7 @@ const Computer = (enemyBoard) => {
     }
   };
 
-  return { activePlayer, randomMove };
+  return { activePlayer, randomMove, name };
 };
 
 export { Player, Computer };

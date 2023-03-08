@@ -14,6 +14,13 @@ function alertSunkShip(ship) {
   body.append(alert);
 }
 
+function alertEndGame(player) {
+  const body = document.querySelector("body");
+  const message = document.createElement("div");
+  message.textContent = `Game Over! ${player.name} is the winner!`;
+  body.append(message);
+}
+
 function renderBoard(game) {
   const board = document.querySelector("#board");
   const grid = document.querySelector("#grid");
@@ -71,7 +78,7 @@ function renderBoard(game) {
   }
 }
 
-export default renderBoard;
+export { renderBoard, alertEndGame };
 
 // renderBoard, imports gameboard object from game and loops through
 // each cell and renders info on occupancy and hit status
