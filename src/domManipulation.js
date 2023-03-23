@@ -51,7 +51,7 @@ function renderBoard(game) {
       if (game.gameboard2.board[i][j].hit) {
         cell.setAttribute("class", "hit");
         if (game.gameboard2.board[i][j].occupied) {
-          cell.textContent = "S";
+          cell.classList.add("occupied");
         }
       }
       row.append(cell);
@@ -67,10 +67,10 @@ function renderBoard(game) {
       cell.setAttribute("class", "cell");
       cell.textContent = "";
       if (game.gameboard1.board[i][j].occupied) {
-        cell.textContent = "S";
+        cell.setAttribute("class", "occupied");
       }
       if (game.gameboard1.board[i][j].hit) {
-        cell.setAttribute("class", "hit");
+        cell.classList.add("hit");
       }
       row.append(cell);
     }
