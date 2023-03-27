@@ -10,7 +10,11 @@ function alertSunkShip(ship) {
   button.addEventListener("click", () => {
     alert.remove();
   });
-  alert.append(message, button);
+  const container = document.createElement("div");
+  container.append(message, button);
+  alert.append(container);
+
+  alert.setAttribute("class", "alert");
   body.append(alert);
 }
 
