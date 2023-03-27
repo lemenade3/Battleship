@@ -3,6 +3,7 @@ const body = document.querySelector("body");
 function pageLoad() {
   const title = document.createElement("div");
   title.textContent = "Battleship";
+  title.setAttribute("id", "title");
 
   const game = document.createElement("div");
   game.setAttribute("id", "game");
@@ -23,13 +24,27 @@ function pageLoad() {
   gridPointer.setAttribute("class", "pointer");
 
   const gridRadar = document.createElement("div");
-  gridRadar.setAttribute("class", "radar");
+  gridRadar.setAttribute("class", "gridRadar");
 
   gridRadar.append(gridPointer, playerGrid);
 
   radar.append(pointer, targetingBoard);
 
-  game.append(gridRadar, radar);
+  const gridContainer = document.createElement("div");
+  const gridTitle = document.createElement("div");
+  gridTitle.setAttribute("class", "radarText");
+  gridTitle.textContent = "YOUR SHIPS";
+
+  gridContainer.append(gridRadar, gridTitle);
+
+  const radarContainer = document.createElement("div");
+  const radarTitle = document.createElement("div");
+  radarTitle.setAttribute("class", "radarText");
+  radarTitle.textContent = "ENEMY SHIPS";
+
+  radarContainer.append(radar, radarTitle);
+
+  game.append(gridContainer, radarContainer);
 
   body.append(title, game);
 }
