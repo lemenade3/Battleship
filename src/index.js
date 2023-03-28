@@ -1,5 +1,5 @@
 import "./style.scss";
-import { renderBoard } from "./domManipulation";
+import renderBoard from "./domManipulation";
 import { newGame } from "./game";
 import pageLoad from "./pageLoad";
 

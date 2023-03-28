@@ -21,41 +21,41 @@ function alertSunkShip(ship) {
   body.append(alert);
 }
 
-function alertEndGame(game) {
-  function writeAlert(player) {
-    const body = document.querySelector("body");
-    const alert = document.createElement("div");
-    const message = document.createElement("div");
-    message.textContent = `Game Over! ${player} is the winner!`;
-    const button = document.createElement("button");
-    button.textContent = "New Game";
-    button.addEventListener("click", () => {
-      body.innerHTML = "";
-      const newGame = endGame();
-      pageLoad();
-      renderBoard(newGame);
-    });
-    const container = document.createElement("div");
-    container.append(message, button);
-    alert.append(container);
-
-    alert.setAttribute("class", "alert");
-    body.append(alert);
-  }
-  if (game.gameboard1.allSunk()) {
-    writeAlert(game.player2.name);
-  }
-  if (game.gameboard2.allSunk()) {
-    writeAlert(game.player1.name);
-  }
-}
-
 function renderBoard(game) {
   const board = document.querySelector("#board");
   const grid = document.querySelector("#grid");
 
   board.innerHTML = "";
   grid.innerHTML = "";
+
+  function alertEndGame() {
+    function writeAlert(player) {
+      const body = document.querySelector("body");
+      const alert = document.createElement("div");
+      const message = document.createElement("div");
+      message.textContent = `Game Over! ${player} is the winner!`;
+      const button = document.createElement("button");
+      button.textContent = "New Game";
+      button.addEventListener("click", () => {
+        body.innerHTML = "";
+        const newGame = endGame();
+        pageLoad();
+        renderBoard(newGame);
+      });
+      const container = document.createElement("div");
+      container.append(message, button);
+      alert.append(container);
+
+      alert.setAttribute("class", "alert");
+      body.append(alert);
+    }
+    if (game.gameboard1.allSunk()) {
+      writeAlert(game.player2.name);
+    }
+    if (game.gameboard2.allSunk()) {
+      writeAlert(game.player1.name);
+    }
+  }
 
   for (let i = 0; i < 10; i += 1) {
     const row = document.createElement("div");
@@ -70,7 +70,7 @@ function renderBoard(game) {
           if (game.gameboard2.board[i][j].occupied) {
             if (game.gameboard2.board[i][j].occupied.isSunk()) {
               alertSunkShip(game.gameboard2.board[i][j].occupied.name);
-              alertEndGame(game);
+              alertEndGame();
             }
           }
           game.changeTurn();
@@ -108,7 +108,7 @@ function renderBoard(game) {
   }
 }
 
-export { renderBoard, alertEndGame };
+export default renderBoard;
 
 // renderBoard, imports gameboard object from game and loops through
 // each cell and renders info on occupancy and hit status
