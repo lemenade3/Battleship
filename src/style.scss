@@ -16,6 +16,7 @@ $radar-size: auto;
 $grid-size: calc($cell-size * 8);
 $radar-font: "manrope";
 $metal: rgb(45, 45, 45);
+$hover-colour: rgb(52, 104, 33);
 
 html {
   height: 100%;
@@ -90,7 +91,7 @@ body {
       width: $cell-size;
       border: $line-border;
       &:hover {
-        background-color: rgb(52, 104, 33);
+        background-color: $hover-colour;
       }
     }
   }
@@ -174,7 +175,7 @@ body {
 
 .gridRadar .pointer {
   position: absolute;
-  z-index: 1024;
+  z-index: 1;
   left: 0%;
   right: 0%;
   top: 0%;
@@ -248,5 +249,29 @@ body {
     background-color: $radar-colour;
     font-family: $radar-font;
     border: $line-border;
+    color: $line-colour;
+    height: 12em;
+    width: 18em;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    div {
+      border: none;
+      margin-top: 3em;
+    }
+    button {
+      background-color: $radar-colour;
+      font-family: $radar-font;
+      border: $line-border;
+      color: $line-colour;
+      padding: 2em;
+      padding-top: 1em;
+      padding-bottom: 1em;
+      margin: 2em;
+      &:hover {
+        background-color: $hover-colour;
+      }
+    }
   }
 }

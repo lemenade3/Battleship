@@ -1,3 +1,6 @@
+import { endGame } from "./game";
+import pageLoad from "./pageLoad";
+
 // functions needed for domManipulation
 
 function alertSunkShip(ship) {
@@ -18,11 +21,33 @@ function alertSunkShip(ship) {
   body.append(alert);
 }
 
-function alertEndGame(player) {
-  const body = document.querySelector("body");
-  const message = document.createElement("div");
-  message.textContent = `Game Over! ${player.name} is the winner!`;
-  body.append(message);
+function alertEndGame(game) {
+  function writeAlert(player) {
+    const body = document.querySelector("body");
+    const alert = document.createElement("div");
+    const message = document.createElement("div");
+    message.textContent = `Game Over! ${player} is the winner!`;
+    const button = document.createElement("button");
+    button.textContent = "New Game";
+    button.addEventListener("click", () => {
+      body.innerHTML = "";
+      const newGame = endGame();
+      pageLoad();
+      renderBoard(newGame);
+    });
+    const container = document.createElement("div");
+    container.append(message, button);
+    alert.append(container);
+
+    alert.setAttribute("class", "alert");
+    body.append(alert);
+  }
+  if (game.gameboard1.allSunk()) {
+    writeAlert(game.player2.name);
+  }
+  if (game.gameboard2.allSunk()) {
+    writeAlert(game.player1.name);
+  }
 }
 
 function renderBoard(game) {
@@ -45,6 +70,7 @@ function renderBoard(game) {
           if (game.gameboard2.board[i][j].occupied) {
             if (game.gameboard2.board[i][j].occupied.isSunk()) {
               alertSunkShip(game.gameboard2.board[i][j].occupied.name);
+              alertEndGame(game);
             }
           }
           game.changeTurn();

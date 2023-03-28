@@ -1,6 +1,7 @@
 const body = document.querySelector("body");
 
 function pageLoad() {
+  body.innerHTML = "";
   const title = document.createElement("div");
   title.textContent = "Battleship";
   title.setAttribute("id", "title");
