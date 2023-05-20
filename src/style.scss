@@ -51,8 +51,20 @@ body {
   font-size: 2em;
 }
 
+.ship {
+  display: flex;
+  margin: 1em;
+  width: min-content;
+  div {
+    background-color: rgb(22, 146, 255);
+  }
+}
+
 .cell {
   background-color: transparent;
+  height: calc($cell-size);
+  width: calc($cell-size);
+  border: $line-border;
 }
 
 .hit {
@@ -83,7 +95,7 @@ body {
   border-width: 2em;
 }
 
-#board {
+.board {
   z-index: 1;
   div {
     div {
@@ -93,16 +105,6 @@ body {
       &:hover {
         background-color: $hover-colour;
       }
-    }
-  }
-}
-
-#grid {
-  div {
-    div {
-      height: calc($cell-size / 2);
-      width: calc($cell-size / 2);
-      border: $line-border;
     }
   }
 }
@@ -260,18 +262,19 @@ body {
       border: none;
       margin-top: 3em;
     }
-    button {
-      background-color: $radar-colour;
-      font-family: $radar-font;
-      border: $line-border;
-      color: $line-colour;
-      padding: 2em;
-      padding-top: 1em;
-      padding-bottom: 1em;
-      margin: 2em;
-      &:hover {
-        background-color: $hover-colour;
-      }
-    }
+  }
+}
+
+.button {
+  background-color: $radar-colour;
+  font-family: $radar-font;
+  border: $line-border;
+  color: $line-colour;
+  padding: 2em;
+  padding-top: 1em;
+  padding-bottom: 1em;
+  margin: 2em;
+  &:hover {
+    background-color: $hover-colour;
   }
 }

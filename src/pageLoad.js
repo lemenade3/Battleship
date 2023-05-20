@@ -1,3 +1,6 @@
+import { newGame } from "./game";
+import { renderBoard, makeShipsAndBoard } from "./domManipulation";
+
 const body = document.querySelector("body");
 
 function pageLoad() {
@@ -6,48 +9,26 @@ function pageLoad() {
   title.textContent = "Battleship";
   title.setAttribute("id", "title");
 
-  const game = document.createElement("div");
-  game.setAttribute("id", "game");
+  const gameHolder = document.createElement("div");
+  gameHolder.setAttribute("id", "game");
 
-  const radar = document.createElement("div");
-  radar.setAttribute("class", "radar");
+  const onePlayer = document.createElement("button");
+  onePlayer.textContent = "1 Player";
+  onePlayer.setAttribute("class", "button");
+  onePlayer.addEventListener("click", () => {
+    gameHolder.innerHTML = "";
+    const game = newGame(true);
+    makeShipsAndBoard();
+    renderBoard(game);
+  });
 
-  const pointer = document.createElement("div");
-  pointer.setAttribute("class", "pointer");
+  const twoPlayer = document.createElement("button");
+  twoPlayer.textContent = "2 Player";
+  twoPlayer.setAttribute("class", "button");
 
-  const targetingBoard = document.createElement("div");
-  targetingBoard.setAttribute("id", "board");
+  gameHolder.append(onePlayer, twoPlayer);
 
-  const playerGrid = document.createElement("div");
-  playerGrid.setAttribute("id", "grid");
-
-  const gridPointer = document.createElement("div");
-  gridPointer.setAttribute("class", "pointer");
-
-  const gridRadar = document.createElement("div");
-  gridRadar.setAttribute("class", "gridRadar");
-
-  gridRadar.append(gridPointer, playerGrid);
-
-  radar.append(pointer, targetingBoard);
-
-  const gridContainer = document.createElement("div");
-  const gridTitle = document.createElement("div");
-  gridTitle.setAttribute("class", "radarText");
-  gridTitle.textContent = "YOUR SHIPS";
-
-  gridContainer.append(gridRadar, gridTitle);
-
-  const radarContainer = document.createElement("div");
-  const radarTitle = document.createElement("div");
-  radarTitle.setAttribute("class", "radarText");
-  radarTitle.textContent = "ENEMY SHIPS";
-
-  radarContainer.append(radar, radarTitle);
-
-  game.append(gridContainer, radarContainer);
-
-  body.append(title, game);
+  body.append(title, gameHolder);
 }
 
 export default pageLoad;
