@@ -40,7 +40,6 @@ function alertEndGame(player) {
 }
 
 function makeShipsAndBoard() {
-  // needs to be exported
   const gameHolder = document.querySelector("#game");
   const board = document.createElement("div");
   board.setAttribute("id", "board");
@@ -48,7 +47,9 @@ function makeShipsAndBoard() {
   const grid = document.createElement("div");
   grid.setAttribute("id", "grid");
 
-  function makeShipElement(length, id) {
+  // make ship object that stores length, orientation and name
+
+  function makeShipElement(length, orientation, id) {
     const ship = document.createElement("div");
     for (let i = 0; i < length; i += 1) {
       const cell = document.createElement("div");
@@ -58,18 +59,24 @@ function makeShipsAndBoard() {
     ship.setAttribute("class", "ship");
     ship.setAttribute("id", id);
     ship.draggable = true;
+    const shipObject = {
+      length,
+      orientation,
+      id,
+    };
+    const shipData = JSON.stringify(shipObject);
     ship.addEventListener("dragstart", (e) => {
-      e.dataTransfer.setData("text/plain", e.target.id);
+      e.dataTransfer.setData("text/plain", shipData);
     });
 
     return ship;
   }
 
-  const carrier = makeShipElement(5, "carrier");
-  const battleship = makeShipElement(4, "battleship");
-  const cruiser = makeShipElement(3, "cruiser");
-  const submarine = makeShipElement(3, "submarine");
-  const destroyer = makeShipElement(2, "destroyer");
+  const carrier = makeShipElement(5, 1, "carrier");
+  const battleship = makeShipElement(4, 1, "battleship");
+  const cruiser = makeShipElement(3, 1, "cruiser");
+  const submarine = makeShipElement(3, 1, "submarine");
+  const destroyer = makeShipElement(2, 1, "destroyer");
 
   const shipsHolder = document.createElement("div");
 
@@ -139,12 +146,19 @@ function renderBoard(game) {
       cell.addEventListener("drop", (e) => {
         e.preventDefault();
 
-        const droppedShipId = e.dataTransfer.getData("text/plain");
-        const droppedShip = document.getElementById(droppedShipId);
+        const droppedShipData = e.dataTransfer.getData("text/plain");
+        const droppedShip = JSON.parse(droppedShipData);
+        const droppedShipId = document.getElementById(droppedShip.id);
 
-        game.gameboard1.placeShip(i, j, 2, 1, "test");
+        game.gameboard1.placeShip(
+          i,
+          j,
+          droppedShip.length,
+          droppedShip.orientation,
+          droppedShip.id
+        );
         renderBoard(game);
-        droppedShip.remove();
+        droppedShipId.remove();
       });
       row.append(cell);
     }
