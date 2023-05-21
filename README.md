@@ -20,3 +20,12 @@ each value in array should be object that tracks if shot fired and if ship locat
 player should allow user to make a move and then pass that coordinate to the gameboard.
 
 ai should extend player but should be capable of assigning random legal moves at first and then should maybe use an algorithm to calculate next best possible move.
+
+To DO:
+
+1. give dropped ship info to placeship --- DONE
+   1a. allow orientatiom of ship to be changed by double clicking
+2. revise namings of boards to make it simpler to read
+3. separate out player board rendering and enemy board rendering
+4. move decision making logic for endgame out of domManipulation and back into game module
+5. fix classes on gameboard, should be using classlist.add

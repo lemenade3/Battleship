@@ -2,6 +2,7 @@
 
 // functions needed for domManipulation
 
+// Called by game module when ship is sunk
 function alertSunkShip(ship) {
   const body = document.querySelector("body");
   const alert = document.createElement("div");
@@ -20,6 +21,7 @@ function alertSunkShip(ship) {
   body.append(alert);
 }
 
+// Called by game module when endgame conditions are met
 function alertEndGame(player) {
   const body = document.querySelector("body");
   const alert = document.createElement("div");
@@ -39,6 +41,7 @@ function alertEndGame(player) {
   body.append(alert);
 }
 
+// Creates the ships and the player's board (excluding the actual cells)
 function makeShipsAndBoard() {
   const gameHolder = document.querySelector("#game");
   const board = document.createElement("div");
@@ -47,7 +50,8 @@ function makeShipsAndBoard() {
   const grid = document.createElement("div");
   grid.setAttribute("id", "grid");
 
-  // make ship object that stores length, orientation and name
+  // makes ship object that stores length, orientation and name
+  // May make sense to create the ships separately and then use their info to create these elements, when dropped, info is passed to cells
 
   function makeShipElement(length, orientation, id) {
     const ship = document.createElement("div");
@@ -64,14 +68,18 @@ function makeShipsAndBoard() {
       orientation,
       id,
     };
+
+    // JSON is used to pass ship objects as text data to the dropzone
     const shipData = JSON.stringify(shipObject);
     ship.addEventListener("dragstart", (e) => {
+      // once dragging is started the event JSON data is stored and .getData is called when the ship is dropped
       e.dataTransfer.setData("text/plain", shipData);
     });
 
     return ship;
   }
 
+  // creates ships, may move this out of this function
   const carrier = makeShipElement(5, 1, "carrier");
   const battleship = makeShipElement(4, 1, "battleship");
   const cruiser = makeShipElement(3, 1, "cruiser");
@@ -98,9 +106,9 @@ function renderBoard(game) {
     for (let j = 0; j < 10; j += 1) {
       const cell = document.createElement("div");
       cell.setAttribute("class", "cell");
-      cell.textContent = "";
       cell.addEventListener("click", () => {
         // if game.player1.makeAttack === true => endGamechangeTurn => renderBoard
+        // need to move attack logic out of DOM module
 
         if (game.player1.activePlayer && !game.gameboard2.board[i][j].hit) {
           game.player1.makeAttack(i, j);
@@ -116,7 +124,7 @@ function renderBoard(game) {
         }
       });
       if (game.gameboard2.board[i][j].hit) {
-        cell.setAttribute("class", "hit");
+        cell.classList.add("hit");
         if (game.gameboard2.board[i][j].occupied) {
           cell.classList.add("occupied");
         }
@@ -132,7 +140,6 @@ function renderBoard(game) {
     for (let j = 0; j < 10; j += 1) {
       const cell = document.createElement("div");
       cell.setAttribute("class", "cell");
-      cell.textContent = "";
       if (game.gameboard1.board[i][j].occupied) {
         cell.classList.add("occupied");
       }
