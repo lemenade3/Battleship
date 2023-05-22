@@ -68,10 +68,18 @@ function makeShipsAndBoard() {
       orientation,
       id,
     };
+    ship.addEventListener("dblclick", () => {
+      if (shipObject.orientation === 1) {
+        shipObject.orientation = 0;
+        ship.style.flexDirection = "column";
+      } else {
+        shipObject.orientation = 1;
+      }
+    });
 
-    // JSON is used to pass ship objects as text data to the dropzone
-    const shipData = JSON.stringify(shipObject);
     ship.addEventListener("dragstart", (e) => {
+      // JSON is used to pass ship objects as text data to the dropzone
+      const shipData = JSON.stringify(shipObject);
       // once dragging is started the event JSON data is stored and .getData is called when the ship is dropped
       e.dataTransfer.setData("text/plain", shipData);
     });
@@ -146,6 +154,9 @@ function renderBoard(game) {
       if (game.gameboard1.board[i][j].hit) {
         cell.classList.add("hit");
       }
+
+      // dropzone logic
+
       cell.addEventListener("dragover", (e) => {
         e.preventDefault();
       });
@@ -153,6 +164,7 @@ function renderBoard(game) {
       cell.addEventListener("drop", (e) => {
         e.preventDefault();
 
+        // JSON data is recieved and parsed from dropped ship
         const droppedShipData = e.dataTransfer.getData("text/plain");
         const droppedShip = JSON.parse(droppedShipData);
         const droppedShipId = document.getElementById(droppedShip.id);
