@@ -44,11 +44,11 @@ function alertEndGame(player) {
 // Creates the ships and the player's board (excluding the actual cells)
 function makeShipsAndBoard() {
   const gameHolder = document.querySelector("#game");
-  const board = document.createElement("div");
-  board.setAttribute("id", "board");
+  const enemyBoard = document.createElement("div");
+  enemyBoard.setAttribute("id", "enemyBoard");
 
-  const grid = document.createElement("div");
-  grid.setAttribute("id", "grid");
+  const playerBoard = document.createElement("div");
+  playerBoard.setAttribute("id", "playerBoard");
 
   // makes ship object that stores length, orientation and name
   // May make sense to create the ships separately and then use their info to create these elements, when dropped, info is passed to cells
@@ -98,15 +98,15 @@ function makeShipsAndBoard() {
 
   shipsHolder.append(carrier, battleship, cruiser, submarine, destroyer);
 
-  gameHolder.append(board, shipsHolder, grid);
+  gameHolder.append(shipsHolder, playerBoard, enemyBoard);
 }
 
 function renderBoard(game) {
-  const board = document.querySelector("#board");
-  const grid = document.querySelector("#grid");
+  const enemyBoard = document.querySelector("#enemyBoard");
+  const playerBoard = document.querySelector("#playerBoard");
 
-  board.innerHTML = "";
-  grid.innerHTML = "";
+  enemyBoard.innerHTML = "";
+  playerBoard.innerHTML = "";
 
   for (let i = 0; i < 10; i += 1) {
     const row = document.createElement("div");
@@ -139,7 +139,7 @@ function renderBoard(game) {
       }
       row.append(cell);
     }
-    board.append(row);
+    enemyBoard.append(row);
   }
 
   for (let i = 0; i < 10; i += 1) {
@@ -181,7 +181,7 @@ function renderBoard(game) {
       });
       row.append(cell);
     }
-    grid.append(row);
+    playerBoard.append(row);
   }
 }
 

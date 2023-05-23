@@ -95,142 +95,14 @@ body {
   border-width: 2em;
 }
 
-.board {
-  z-index: 1;
+#enemyBoard {
+  margin: 10px;
   div {
     div {
-      height: $cell-size;
-      width: $cell-size;
-      border: $line-border;
       &:hover {
         background-color: $hover-colour;
       }
     }
-  }
-}
-
-.radar {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: $radar-colour;
-  border: $line-border;
-  border-radius: calc($radar-size / 2);
-  width: $radar-size;
-  height: $radar-size;
-  position: relative;
-  background-size: $radar-size $radar-size;
-  margin: 2em;
-}
-
-.radar .pointer {
-  position: absolute;
-  z-index: 0;
-  left: 0%;
-  right: 0%;
-  top: 0%;
-  bottom: 50%;
-  will-change: transform;
-  transform-origin: 50% 100%;
-  border-radius: 50% 50% 0 0 / 100% 100% 0 0;
-  background-image: linear-gradient(
-    135deg,
-    $line-colour 0%,
-    rgba(0, 0, 0, 0.02) 70%,
-    rgba(0, 0, 0, 0) 100%
-  );
-  clip-path: polygon(
-    100% 0,
-    100% 10%,
-    //控制扇形角度 100% => 135deg
-    50% 100%,
-    0 100%,
-    0 0
-  );
-
-  animation: rotate360 3s infinite linear;
-}
-
-.radar .pointer:after {
-  content: "";
-  position: absolute;
-  width: 100%;
-  bottom: -1px;
-  border-top: 2px solid $line-colour;
-  box-shadow: 0 0 3px $line-colour;
-  border-radius: 9px;
-}
-
-.gridRadar {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: $radar-colour;
-  border: $line-border;
-  border-radius: calc($radar-size / 2);
-  width: $grid-size;
-  height: $grid-size;
-  position: relative;
-  background-size: $grid-size $grid-size;
-  margin: 2em;
-}
-
-.gridRadar .pointer {
-  position: absolute;
-  z-index: 1;
-  left: 0%;
-  right: 0%;
-  top: 0%;
-  bottom: 50%;
-  will-change: transform;
-  transform-origin: 50% 100%;
-  border-radius: 50% 50% 0 0 / 100% 100% 0 0;
-  background-image: linear-gradient(
-    135deg,
-    $line-colour 0%,
-    rgba(0, 0, 0, 0.02) 70%,
-    rgba(0, 0, 0, 0) 100%
-  );
-  clip-path: polygon(
-    100% 0,
-    100% 10%,
-    //控制扇形角度 100% => 135deg
-    50% 100%,
-    0 100%,
-    0 0
-  );
-
-  animation: rotate360 3s infinite linear;
-}
-
-.gridRadar .pointer:after {
-  content: "";
-  position: absolute;
-  width: 100%;
-  bottom: -1px;
-  border-top: 2px solid $line-colour;
-  box-shadow: 0 0 3px $line-colour;
-  border-radius: 9px;
-}
-
-@keyframes rotate360 {
-  0% {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(-360deg);
-  }
-}
-
-@keyframes shadow {
-  0% {
-    opacity: 0;
-  }
-  50% {
-    opacity: 1;
-  }
-  to {
-    opacity: 0;
   }
 }
 
