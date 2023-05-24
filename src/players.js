@@ -1,12 +1,17 @@
+import { alertSunkShip } from "./domManipulation";
+
 const Player = (enemyBoard, name) => {
   const activePlayer = null;
 
   const makeAttack = (x, y) => {
-    if (enemyBoard.board[x][y].hit) {
-      return false;
+    if (!enemyBoard.board[x][y].hit) {
+      enemyBoard.receiveAttack(x, y);
+      if (enemyBoard.board[x][y].occupied) {
+        if (enemyBoard.board[x][y].occupied.isSunk())
+          alertSunkShip(enemyBoard.board[x][y].occupied.name); // import
+      }
+      // endGame()
     }
-    enemyBoard.receiveAttack(x, y);
-    return true;
   };
 
   return { activePlayer, makeAttack, name };
