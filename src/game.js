@@ -1,5 +1,6 @@
 import { Player, Computer } from "./players";
 import Gameboard from "./gameboard";
+import { alertEndGame } from "./domManipulation";
 
 const newGame = (comp) => {
   const gameboard1 = Gameboard();
@@ -16,16 +17,26 @@ const newGame = (comp) => {
 
   let activePlayer = player1;
 
+  const endGame = () => {
+    if (gameboard1.allSunk()) {
+      alertEndGame(player2.name);
+    }
+    if (gameboard2.allSunk()) {
+      alertEndGame(player1.name);
+    }
+  };
+
+  // Player 2 moves need to be removed at later date, this function should only change turns
   const changeTurn = () => {
+    endGame();
     if (activePlayer === player1) {
       activePlayer = player2;
+      activePlayer.randomMove();
+      changeTurn();
     } else {
       activePlayer = player1;
     }
   };
-
-  // renderBoard should be called from within here and players and gameboards
-  // should be made private
 
   return {
     activePlayer,
@@ -35,15 +46,10 @@ const newGame = (comp) => {
   };
 };
 
-const endGame = () => {
-  const game = newGame(true);
-  return game;
-};
-
 // functions needed for game
 
 // new game
 // end game
 // change turn
 
-export { newGame, endGame };
+export default newGame;

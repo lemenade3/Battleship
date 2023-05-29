@@ -1,32 +1,35 @@
 import { alertSunkShip } from "./domManipulation";
 
 const Player = (enemyBoard, name) => {
-  const activePlayer = null;
-
   const makeAttack = (x, y) => {
-    if (!enemyBoard.board[x][y].hit) {
+    if (enemyBoard.board[x][y].hit !== true) {
       enemyBoard.receiveAttack(x, y);
       if (enemyBoard.board[x][y].occupied) {
         if (enemyBoard.board[x][y].occupied.isSunk())
-          alertSunkShip(enemyBoard.board[x][y].occupied.name); // import
+          alertSunkShip(enemyBoard.board[x][y].occupied.name);
       }
-      // endGame()
+      return true;
     }
+    return false;
   };
 
-  return { activePlayer, makeAttack, name };
+  return { makeAttack, name };
 };
 
 const Computer = (enemyBoard) => {
   const name = "Computer";
-  const activePlayer = null;
 
+  // This works for now but need to research using extends method to use the Player object as a prototype
   const makeAttack = (x, y) => {
-    if (enemyBoard.board[x][y].hit) {
-      return false;
+    if (enemyBoard.board[x][y].hit !== true) {
+      enemyBoard.receiveAttack(x, y);
+      if (enemyBoard.board[x][y].occupied) {
+        if (enemyBoard.board[x][y].occupied.isSunk())
+          alertSunkShip(enemyBoard.board[x][y].occupied.name);
+      }
+      return true;
     }
-    enemyBoard.receiveAttack(x, y);
-    return true;
+    return false;
   };
 
   const randomMove = () => {
@@ -38,7 +41,7 @@ const Computer = (enemyBoard) => {
     }
   };
 
-  return { activePlayer, randomMove, name };
+  return { randomMove, name };
 };
 
 export { Player, Computer };

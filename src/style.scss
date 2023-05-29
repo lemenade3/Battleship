@@ -8,14 +8,14 @@
   src: url(/src/fonts/manrope.ttf) format("truetype");
 }
 
-$radar-colour: rgb(32, 65, 20);
+$background-colour: rgb(22, 21, 86);
 $line-colour: rgb(52, 212, 52);
 $line-border: 0.5px solid $line-colour;
 $cell-size: 2.5em;
 $radar-size: auto;
 $grid-size: calc($cell-size * 8);
 $radar-font: "manrope";
-$metal: rgb(45, 45, 45);
+$text-colour: rgb(255, 255, 255);
 $hover-colour: rgb(52, 104, 33);
 
 html {
@@ -27,11 +27,7 @@ body {
   margin: 0;
   display: flex;
   flex-direction: column;
-  background-image: linear-gradient(
-    to bottom right,
-    rgb(212, 212, 212),
-    rgb(36, 36, 36)
-  );
+  background-color: $background-colour;
   background-repeat: no-repeat;
   background-attachment: fixed;
   height: 100%;
@@ -41,8 +37,9 @@ body {
 
 #title {
   font-size: 8em;
-  font-family: "blackOps";
-  color: $metal;
+  font-family: "manrope";
+  font-weight: bold;
+  color: $text-colour;
 }
 
 .radarText {
@@ -88,11 +85,7 @@ body {
   align-items: center;
   justify-content: center;
   padding: 3rem;
-  background-color: $radar-colour;
-  border-style: solid;
-  border-color: $metal;
-  border-radius: 3rem;
-  border-width: 2em;
+  background-color: $background-colour;
 }
 
 #enemyBoard {
@@ -120,7 +113,7 @@ body {
   align-items: center;
   justify-content: center;
   div {
-    background-color: $radar-colour;
+    background-color: $background-colour;
     font-family: $radar-font;
     border: $line-border;
     color: $line-colour;
@@ -138,7 +131,7 @@ body {
 }
 
 .button {
-  background-color: $radar-colour;
+  background-color: $background-colour;
   font-family: $radar-font;
   border: $line-border;
   color: $line-colour;

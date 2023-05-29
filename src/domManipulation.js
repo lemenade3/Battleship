@@ -99,6 +99,7 @@ function makePlayerShipsAndBoard() {
   gameHolder.append(shipsHolder, playerBoard);
 }
 
+// Renders Player board information
 function renderPlayerBoard(game) {
   const playerBoard = document.querySelector("#playerBoard");
 
@@ -147,6 +148,7 @@ function renderPlayerBoard(game) {
   }
 }
 
+// Creates holder for Enemy Board
 function makeEnemyBoard() {
   const gameHolder = document.querySelector("#game");
 
@@ -156,6 +158,7 @@ function makeEnemyBoard() {
   gameHolder.append(enemyBoard);
 }
 
+// Renders Enemy board information
 function renderEnemyBoard(game) {
   const enemyBoard = document.querySelector("#enemyBoard");
 
@@ -168,11 +171,11 @@ function renderEnemyBoard(game) {
       const cell = document.createElement("div");
       cell.setAttribute("class", "cell");
       cell.addEventListener("click", () => {
+        // need to remove this decision making from the DOM module
         if (game.activePlayer.makeAttack(i, j)) {
-          renderEnemyBoard(game);
+          game.changeTurn();
           renderPlayerBoard(game);
         }
-
         if (game.gameboard2.board[i][j].hit) {
           cell.classList.add("hit");
           if (game.gameboard2.board[i][j].occupied) {

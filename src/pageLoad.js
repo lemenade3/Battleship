@@ -1,4 +1,4 @@
-import { newGame } from "./game";
+import newGame from "./game";
 import {
   renderPlayerBoard,
   makePlayerShipsAndBoard,
@@ -11,7 +11,7 @@ const body = document.querySelector("body");
 function pageLoad() {
   body.innerHTML = "";
   const title = document.createElement("div");
-  title.textContent = "Battleship";
+  title.textContent = "BATTLESHIP";
   title.setAttribute("id", "title");
 
   const gameHolder = document.createElement("div");
