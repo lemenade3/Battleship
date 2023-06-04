@@ -1,10 +1,10 @@
-import newGame from "./game";
 import {
   renderPlayerBoard,
   makePlayerShipsAndBoard,
   renderEnemyBoard,
   makeEnemyBoard,
-} from "./domManipulation";
+} from "./boardRendering";
+import newGame from "./game";
 
 const body = document.querySelector("body");
 
@@ -21,8 +21,8 @@ function pageLoad() {
   onePlayer.textContent = "1 Player";
   onePlayer.setAttribute("class", "button");
   onePlayer.addEventListener("click", () => {
-    gameHolder.innerHTML = "";
     const game = newGame(true);
+    gameHolder.innerHTML = "";
     makePlayerShipsAndBoard();
     renderPlayerBoard(game);
     makeEnemyBoard();

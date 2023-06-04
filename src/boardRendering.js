@@ -1,46 +1,3 @@
-// import pageLoad from "./pageLoad";
-
-// functions needed for domManipulation
-
-// Called by game module when ship is sunk
-function alertSunkShip(ship) {
-  const body = document.querySelector("body");
-  const alert = document.createElement("div");
-  const message = document.createElement("div");
-  message.textContent = `${ship} was Sunk!`;
-  const button = document.createElement("button");
-  button.textContent = "Ok!";
-  button.addEventListener("click", () => {
-    alert.remove();
-  });
-  const container = document.createElement("div");
-  container.append(message, button);
-  alert.append(container);
-
-  alert.setAttribute("class", "alert");
-  body.append(alert);
-}
-
-// Called by game module when endgame conditions are met
-function alertEndGame(player) {
-  const body = document.querySelector("body");
-  const alert = document.createElement("div");
-  const message = document.createElement("div");
-  message.textContent = `Game Over! ${player} is the winner!`;
-  const button = document.createElement("button");
-  button.textContent = "New Game";
-  button.addEventListener("click", () => {
-    body.innerHTML = "";
-    // pageLoad();
-  });
-  const container = document.createElement("div");
-  container.append(message, button);
-  alert.append(container);
-
-  alert.setAttribute("class", "alert");
-  body.append(alert);
-}
-
 // makes ship object that stores length, orientation and name
 // May make sense to create the ships separately and then use their info to create these elements, when dropped, info is passed to cells
 
@@ -192,14 +149,7 @@ function renderEnemyBoard(game) {
 
 export {
   renderPlayerBoard,
+  renderEnemyBoard,
   makePlayerShipsAndBoard,
   makeEnemyBoard,
-  renderEnemyBoard,
-  alertSunkShip,
-  alertEndGame,
 };
-
-// renderBoard, imports gameboard object from game and loops through
-// each cell and renders info on occupancy and hit status
-
-// logic to make onclick of cell call player.makeAttack

@@ -1,7 +1,7 @@
 import "./style.scss";
 import pageLoad from "./pageLoad";
 
-pageLoad();
+pageLoad(); // should take no parameters
 
 /* both dom and index need to call pageload, pageload currently calls the rendering functions
 for the gameboard from dom.

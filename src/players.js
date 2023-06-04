@@ -1,4 +1,4 @@
-import { alertSunkShip } from "./domManipulation";
+import { alertSunkShip } from "./domAlerts";
 
 const Player = (enemyBoard, name) => {
   const makeAttack = (x, y) => {

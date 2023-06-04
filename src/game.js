@@ -1,6 +1,6 @@
 import { Player, Computer } from "./players";
 import Gameboard from "./gameboard";
-import { alertEndGame } from "./domManipulation";
+import { alertEndGame } from "./domAlerts";
 
 const newGame = (comp) => {
   const gameboard1 = Gameboard();
@@ -31,7 +31,7 @@ const newGame = (comp) => {
     endGame();
     if (activePlayer === player1) {
       activePlayer = player2;
-      activePlayer.randomMove();
+      player2.randomMove();
       changeTurn();
     } else {
       activePlayer = player1;
