@@ -76,10 +76,6 @@ body {
   background-color: red;
 }
 
-.row {
-  display: flex;
-}
-
 #game {
   display: flex;
   align-items: center;
@@ -97,6 +93,10 @@ body {
       }
     }
   }
+}
+
+.board {
+  display: flex;
 }
 
 .alert {

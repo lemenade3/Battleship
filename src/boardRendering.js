@@ -17,11 +17,12 @@ function makeShipElement(length, orientation, id) {
     id,
   };
   ship.addEventListener("dblclick", () => {
-    if (shipObject.orientation === 1) {
-      shipObject.orientation = 0;
+    if (shipObject.orientation === 0) {
+      shipObject.orientation = 1;
       ship.style.flexDirection = "column";
     } else {
-      shipObject.orientation = 1;
+      shipObject.orientation = 0;
+      ship.style.flexDirection = "row";
     }
   });
 
@@ -41,13 +42,14 @@ function makePlayerShipsAndBoard() {
 
   const playerBoard = document.createElement("div");
   playerBoard.setAttribute("id", "playerBoard");
+  playerBoard.setAttribute("class", "board");
 
   // creates ships, may move this out of this function
-  const carrier = makeShipElement(5, 1, "carrier");
-  const battleship = makeShipElement(4, 1, "battleship");
-  const cruiser = makeShipElement(3, 1, "cruiser");
-  const submarine = makeShipElement(3, 1, "submarine");
-  const destroyer = makeShipElement(2, 1, "destroyer");
+  const carrier = makeShipElement(5, 0, "carrier");
+  const battleship = makeShipElement(4, 0, "battleship");
+  const cruiser = makeShipElement(3, 0, "cruiser");
+  const submarine = makeShipElement(3, 0, "submarine");
+  const destroyer = makeShipElement(2, 0, "destroyer");
 
   const shipsHolder = document.createElement("div");
 
@@ -63,8 +65,8 @@ function renderPlayerBoard(game) {
   playerBoard.innerHTML = "";
 
   for (let i = 0; i < 10; i += 1) {
-    const row = document.createElement("div");
-    row.setAttribute("class", "row");
+    const column = document.createElement("div");
+    column.setAttribute("class", "column");
     for (let j = 0; j < 10; j += 1) {
       const cell = document.createElement("div");
       cell.setAttribute("class", "cell");
@@ -89,19 +91,22 @@ function renderPlayerBoard(game) {
         const droppedShip = JSON.parse(droppedShipData);
         const droppedShipId = document.getElementById(droppedShip.id);
 
-        game.gameboard1.placeShip(
-          i,
-          j,
-          droppedShip.length,
-          droppedShip.orientation,
-          droppedShip.id
-        );
-        renderPlayerBoard(game);
-        droppedShipId.remove();
+        if (
+          game.gameboard1.placeShip(
+            i,
+            j,
+            droppedShip.length,
+            droppedShip.orientation,
+            droppedShip.id
+          )
+        ) {
+          renderPlayerBoard(game);
+          droppedShipId.remove();
+        }
       });
-      row.append(cell);
+      column.append(cell);
     }
-    playerBoard.append(row);
+    playerBoard.append(column);
   }
 }
 
@@ -111,6 +116,7 @@ function makeEnemyBoard() {
 
   const enemyBoard = document.createElement("div");
   enemyBoard.setAttribute("id", "enemyBoard");
+  enemyBoard.setAttribute("class", "board");
 
   gameHolder.append(enemyBoard);
 }
@@ -122,8 +128,8 @@ function renderEnemyBoard(game) {
   enemyBoard.innerHTML = "";
 
   for (let i = 0; i < 10; i += 1) {
-    const row = document.createElement("div");
-    row.setAttribute("class", "row");
+    const column = document.createElement("div");
+    column.setAttribute("class", "column");
     for (let j = 0; j < 10; j += 1) {
       const cell = document.createElement("div");
       cell.setAttribute("class", "cell");
@@ -141,9 +147,9 @@ function renderEnemyBoard(game) {
         }
       });
 
-      row.append(cell);
+      column.append(cell);
     }
-    enemyBoard.append(row);
+    enemyBoard.append(column);
   }
 }
 

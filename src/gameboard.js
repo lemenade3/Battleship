@@ -21,6 +21,9 @@ const Gameboard = () => {
   }
 
   const isOccupied = (x, y) => {
+    if (typeof board[x][y] === "undefined") {
+      return true;
+    }
     if (board[x][y].occupied) {
       return true;
     }
@@ -31,18 +34,29 @@ const Gameboard = () => {
     const ship = Ship(length, name);
     if (axis === 0) {
       for (let i = 0; i < length; i += 1) {
-        if (isOccupied(x + i, y)) {
-          // may cause issues when ship is placed, the ship might be lost if incorrect
+        // Checks if placement will go off edge of board
+        if (!board[x + length]) {
           return false;
         }
-        board[x + i][y].occupied = ship;
+        if (isOccupied(x + i, y)) {
+          return false;
+        }
+        if (i === length - 1) {
+          for (let j = 0; j < length; j += 1) {
+            board[x + j][y].occupied = ship;
+          }
+        }
       }
     } else {
       for (let i = 0; i < length; i += 1) {
         if (isOccupied(x, y - i)) {
           return false; // returning false may need to be changed when game is more complex
         }
-        board[x][y - i].occupied = ship;
+        if (i === length - 1) {
+          for (let j = 0; j < length; j += 1) {
+            board[x][y - j].occupied = ship;
+          }
+        }
       }
     }
     return ship;

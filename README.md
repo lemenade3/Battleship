@@ -25,11 +25,11 @@ To DO:
 
 1. give dropped ship info to placeship --- DONE
    1a. allow orientatiom of ship to be changed by double clicking --- DONE
-2. revise namings of boards to make it simpler to read
-3. separate out player board rendering and enemy board rendering
-4. move decision making logic for endgame out of domManipulation and back into game module
-5. fix classes on gameboard, should be using classlist.add
-6. create logic to allow computer to randomly place ships
+2. revise namings of boards to make it simpler to read --   DONE
+3. separate out player board rendering and enemy board rendering --- DONE
+4. move decision making logic for endgame out of domManipulation and back into game module --- DONE
+5. fix classes on gameboard, should be using classlist.add --- DONE
+6. create logic to allow computer to randomly place ships, NEEDS PLACING SHIP CORRECTED FIRST
 7. revise styling
 8. create pass and play mode
    nine. improve ai targeting logic
