@@ -62,6 +62,16 @@ const Gameboard = () => {
     return ship;
   };
 
+  const randomPlaceShip = (length = 1, name = "") => {
+    const x = Math.floor(Math.random() * 10);
+    const y = Math.floor(Math.random() * 10);
+    const axis = Math.floor(Math.random() * 2);
+
+    if (placeShip(x, y, length, axis, name) === false) {
+      randomPlaceShip(length, name);
+    }
+  };
+
   const receiveAttack = (x, y) => {
     if (board[x][y].hit) {
       return false;
@@ -92,6 +102,7 @@ const Gameboard = () => {
   return {
     board,
     placeShip,
+    randomPlaceShip,
     receiveAttack,
     allSunk,
   };

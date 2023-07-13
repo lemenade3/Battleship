@@ -111,12 +111,20 @@ function renderPlayerBoard(game) {
 }
 
 // Creates holder for Enemy Board
-function makeEnemyBoard() {
+function makeEnemyBoard(game) {
   const gameHolder = document.querySelector("#game");
 
   const enemyBoard = document.createElement("div");
   enemyBoard.setAttribute("id", "enemyBoard");
   enemyBoard.setAttribute("class", "board");
+
+  // create random place function in gameboard, can then be used to allow player to input random selections for units
+
+  game.gameboard2.randomPlaceShip(5, "carrier");
+  game.gameboard2.randomPlaceShip(4, "battleship");
+  game.gameboard2.randomPlaceShip(3, "cruiser");
+  game.gameboard2.randomPlaceShip(3, "submarine");
+  game.gameboard2.randomPlaceShip(2, "destroyer");
 
   gameHolder.append(enemyBoard);
 }

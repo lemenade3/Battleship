@@ -25,7 +25,7 @@ function pageLoad() {
     gameHolder.innerHTML = "";
     makePlayerShipsAndBoard();
     renderPlayerBoard(game);
-    makeEnemyBoard();
+    makeEnemyBoard(game);
     renderEnemyBoard(game);
   });
 
