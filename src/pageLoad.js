@@ -18,7 +18,7 @@ function pageLoad() {
   gameHolder.setAttribute("id", "game");
 
   const onePlayer = document.createElement("button");
-  onePlayer.textContent = "1 Player";
+  onePlayer.textContent = "Single Player";
   onePlayer.setAttribute("class", "button");
   onePlayer.addEventListener("click", () => {
     const game = newGame(true);
@@ -30,7 +30,7 @@ function pageLoad() {
   });
 
   const twoPlayer = document.createElement("button");
-  twoPlayer.textContent = "2 Player";
+  twoPlayer.textContent = "Multiplayer";
   twoPlayer.setAttribute("class", "button");
 
   gameHolder.append(onePlayer, twoPlayer);
