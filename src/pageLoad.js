@@ -10,7 +10,11 @@ const body = document.querySelector("body");
 
 function pageLoad() {
   body.innerHTML = "";
+
+  const topSection = document.createElement("div");
+  topSection.setAttribute("id", "topSection");
   const title = document.createElement("div");
+
   title.textContent = "BATTLESHIP";
   title.setAttribute("id", "title");
 
@@ -21,6 +25,7 @@ function pageLoad() {
   onePlayer.textContent = "Single Player";
   onePlayer.setAttribute("class", "button");
   onePlayer.addEventListener("click", () => {
+    topSection.style.height = "0px";
     const game = newGame(true);
     gameHolder.innerHTML = "";
     makePlayerShipsAndBoard();
@@ -35,7 +40,7 @@ function pageLoad() {
 
   gameHolder.append(onePlayer, twoPlayer);
 
-  body.append(title, gameHolder);
+  body.append(topSection, title, gameHolder);
 }
 
 export default pageLoad;

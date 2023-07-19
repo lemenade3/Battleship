@@ -31,7 +31,12 @@ body {
   height: 100%;
   background-size: cover;
   align-items: center;
-  justify-content: center;
+}
+
+#topSection {
+  height: calc(100vh / 3);
+  width: 100%;
+  transition: height 600ms;
 }
 
 #title {
